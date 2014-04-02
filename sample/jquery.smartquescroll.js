@@ -20,7 +20,8 @@
       this.touchstart = __bind(this.touchstart, this);
       this.touch = false;
       this.model = {
-        y: 0
+        y: 0,
+        min_y: this.el.parent().height() - this.el.outerHeight(true)
       };
       this.move();
       this.prev_y = 0;
@@ -59,6 +60,9 @@
       if (this.model.y > 0) {
         this.model.y = 0;
       }
+      if (this.model.min_y > this.model.y) {
+        this.model.y = this.model.min_y;
+      }
       this.translate(0, this.model.y);
       return typeof (_base = this.options).scroll === "function" ? _base.scroll(0, this.model.y) : void 0;
     };
@@ -77,7 +81,7 @@
       if (v > 0.6 || v < -0.6) {
         return this.timer = request_animation_frame((function(_this) {
           return function() {
-            return _this.inertia_scroll(v * 0.92);
+            return _this.inertia_scroll(v * 0.93);
           };
         })(this));
       }

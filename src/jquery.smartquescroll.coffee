@@ -5,7 +5,10 @@ class MobilePage
   constructor: (@el, @options) ->
     @touch = false
 
-    @model = {y: 0}
+    @model =
+      y: 0
+      min_y: @el.parent().height() - @el.outerHeight(true)
+
     @move()
 
     @prev_y = 0
@@ -38,6 +41,8 @@ class MobilePage
 
   move: ->
     @model.y = 0 if @model.y > 0
+    @model.y = @model.min_y if @model.min_y > @model.y
+
     @translate(0, @model.y)
     @options.scroll?(0, @model.y)
 
@@ -53,7 +58,7 @@ class MobilePage
 
     if v > 0.6 || v < -0.6
       @timer = request_animation_frame =>
-        @inertia_scroll(v * 0.92)
+        @inertia_scroll(v * 0.93)
 
   stop_scroll: ->
     cancel_animation_frame(@timer)
