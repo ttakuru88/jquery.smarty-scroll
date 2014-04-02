@@ -1,0 +1,3 @@
+#!/bin/sh
+
+scp -r sample root@smart-quest.net:/var/www/vhosts/test.smart-quest.net/shared/public/system
