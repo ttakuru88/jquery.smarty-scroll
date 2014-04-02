@@ -23,6 +23,7 @@ class MobilePage
 
     @prev_y = @get_y(e)
     @velocity = 0
+    @throttle = 0
     @stop_scroll()
 
     @touch = true
@@ -44,7 +45,7 @@ class MobilePage
     @model.y = @model.min_y if @model.min_y > @model.y
 
     @translate(0, @model.y)
-    @options.scroll?(0, @model.y)
+    @options.scroll?(0, @model.y) if (@throttle++ % @options.throttle) == 0
 
   translate: (x, y) ->
     @el.css
@@ -56,9 +57,9 @@ class MobilePage
     @model.y -= v
     @move()
 
-    if v > 0.6 || v < -0.6
+    if v > @options.minMove || v < -@options.minMove
       @timer = request_animation_frame =>
-        @inertia_scroll(v * 0.93)
+        @inertia_scroll(v * @options.shackle)
 
   stop_scroll: ->
     cancel_animation_frame(@timer)
@@ -78,6 +79,9 @@ class Page
   $.fn.smartquescroll = (options) ->
     options = $.extend
       scroll: null
+      throttle: 4
+      shackle: 0.93
+      minMove: 0.6
     , options
 
     @each ->

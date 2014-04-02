@@ -37,6 +37,7 @@
       }
       this.prev_y = this.get_y(e);
       this.velocity = 0;
+      this.throttle = 0;
       this.stop_scroll();
       return this.touch = true;
     };
@@ -64,7 +65,9 @@
         this.model.y = this.model.min_y;
       }
       this.translate(0, this.model.y);
-      return typeof (_base = this.options).scroll === "function" ? _base.scroll(0, this.model.y) : void 0;
+      if ((this.throttle++ % this.options.throttle) === 0) {
+        return typeof (_base = this.options).scroll === "function" ? _base.scroll(0, this.model.y) : void 0;
+      }
     };
 
     MobilePage.prototype.translate = function(x, y) {
@@ -78,10 +81,10 @@
     MobilePage.prototype.inertia_scroll = function(v) {
       this.model.y -= v;
       this.move();
-      if (v > 0.6 || v < -0.6) {
+      if (v > this.options.minMove || v < -this.options.minMove) {
         return this.timer = request_animation_frame((function(_this) {
           return function() {
-            return _this.inertia_scroll(v * 0.93);
+            return _this.inertia_scroll(v * _this.options.shackle);
           };
         })(this));
       }
@@ -120,7 +123,10 @@
   (function($) {
     return $.fn.smartquescroll = function(options) {
       options = $.extend({
-        scroll: null
+        scroll: null,
+        throttle: 4,
+        shackle: 0.93,
+        minMove: 0.6
       }, options);
       this.each(function() {
         if (navigator.userAgent.match(/iPhone|iPad|iPod|Android/)) {
