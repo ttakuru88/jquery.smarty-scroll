@@ -11,34 +11,56 @@
       this.touchmove = __bind(this.touchmove, this);
       this.touchstart = __bind(this.touchstart, this);
       this.touch = false;
-      this.translate(0, 0);
+      this.model = {
+        y: 0
+      };
+      this.move();
+      this.prev_y = 0;
       this.el.on('touchstart', this.touchstart);
       this.el.on('touchmove', this.touchmove);
       this.el.on('touchend', this.touchend);
     }
 
-    MobilePage.prototype.touchstart = function() {
+    MobilePage.prototype.touchstart = function(e) {
       if (this.touch) {
         return;
       }
+      this.prev_y = this.get_y(e);
       return this.touch = true;
     };
 
     MobilePage.prototype.touchmove = function(e) {
-      var _base;
-      return typeof (_base = this.options).scroll === "function" ? _base.scroll(0, e) : void 0;
+      var now_y, _base;
+      if (typeof (_base = this.options).scroll === "function") {
+        _base.scroll(0, e);
+      }
+      now_y = this.get_y(e);
+      this.model.y += now_y - this.prev_y;
+      this.prev_y = now_y;
+      return this.move();
     };
 
     MobilePage.prototype.touchend = function() {
       return this.touch = false;
     };
 
+    MobilePage.prototype.move = function() {
+      if (this.model.y > 0) {
+        this.model.y = 0;
+      }
+      return this.translate(0, this.model.y);
+    };
+
     MobilePage.prototype.translate = function(x, y) {
       return this.el.css({
-        'transform': "translate  (" + x + ", " + y + ")",
-        '-webkit-transform': "translate3d(" + x + ", " + y + ", 0)",
-        '-ms-transform': "translate  (" + x + ", " + y + ")"
+        'transform': "translate  (" + x + "px, " + y + "px)",
+        '-webkit-transform': "translate3d(" + x + "px, " + y + "px, 0px)",
+        '-ms-transform': "translate  (" + x + "px, " + y + "px)"
       });
+    };
+
+    MobilePage.prototype.get_y = function(e) {
+      return e.originalEvent.touches[0].pageY;
     };
 
     return MobilePage;
