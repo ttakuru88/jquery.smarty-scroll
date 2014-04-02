@@ -20,8 +20,6 @@ class MobilePage
     @touch = true
 
   touchmove: (e) =>
-    @options.scroll?(0, e)
-
     now_y = @get_y(e)
     @model.y += now_y - @prev_y
     @prev_y = now_y
@@ -34,6 +32,7 @@ class MobilePage
   move: ->
     @model.y = 0 if @model.y > 0
     @translate(0, @model.y)
+    @options.scroll?(0, @model.y)
 
   translate: (x, y) ->
     @el.css
@@ -50,7 +49,7 @@ class Page
     @wrapper.css('overflow', 'scroll')
 
     @wrapper.on 'scroll', (e) =>
-      @options.scroll?(@wrapper.scrollTop(), e)
+      @options.scroll?(@wrapper.scrollTop())
 
 (($) ->
   $.fn.smartquescroll = (options) ->

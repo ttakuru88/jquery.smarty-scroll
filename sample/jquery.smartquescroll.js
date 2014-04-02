@@ -31,10 +31,7 @@
     };
 
     MobilePage.prototype.touchmove = function(e) {
-      var now_y, _base;
-      if (typeof (_base = this.options).scroll === "function") {
-        _base.scroll(0, e);
-      }
+      var now_y;
       now_y = this.get_y(e);
       this.model.y += now_y - this.prev_y;
       this.prev_y = now_y;
@@ -46,10 +43,12 @@
     };
 
     MobilePage.prototype.move = function() {
+      var _base;
       if (this.model.y > 0) {
         this.model.y = 0;
       }
-      return this.translate(0, this.model.y);
+      this.translate(0, this.model.y);
+      return typeof (_base = this.options).scroll === "function" ? _base.scroll(0, this.model.y) : void 0;
     };
 
     MobilePage.prototype.translate = function(x, y) {
@@ -77,7 +76,7 @@
       this.wrapper.on('scroll', (function(_this) {
         return function(e) {
           var _base;
-          return typeof (_base = _this.options).scroll === "function" ? _base.scroll(_this.wrapper.scrollTop(), e) : void 0;
+          return typeof (_base = _this.options).scroll === "function" ? _base.scroll(_this.wrapper.scrollTop()) : void 0;
         };
       })(this));
     }
