@@ -45,7 +45,7 @@ class MobilePage
     @model.y = @model.min_y if @model.min_y > @model.y
 
     @translate(0, @model.y)
-    @options.scroll?(0, @model.y) if (@throttle++ % @options.throttle) == 0
+    @options.scroll?(-@model.y) if (@throttle++ % @options.throttle) == 0
 
   translate: (x, y) ->
     @el.css

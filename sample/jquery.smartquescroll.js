@@ -66,7 +66,7 @@
       }
       this.translate(0, this.model.y);
       if ((this.throttle++ % this.options.throttle) === 0) {
-        return typeof (_base = this.options).scroll === "function" ? _base.scroll(0, this.model.y) : void 0;
+        return typeof (_base = this.options).scroll === "function" ? _base.scroll(-this.model.y) : void 0;
       }
     };
 
