@@ -22,6 +22,7 @@
     }
 
     MobilePage.prototype.touchstart = function(e) {
+      e.preventDefault();
       if (this.touch) {
         return;
       }

@@ -12,6 +12,7 @@ class MobilePage
     @el.on 'touchend',   @touchend
 
   touchstart: (e) =>
+    e.preventDefault()
     return if @touch
 
     @prev_y = @get_y(e)
