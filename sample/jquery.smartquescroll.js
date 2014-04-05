@@ -31,7 +31,6 @@
     }
 
     MobilePage.prototype.touchstart = function(e) {
-      e.preventDefault();
       if (this.touch) {
         return;
       }
@@ -48,6 +47,9 @@
       this.velocity = this.prev_y - now_y;
       this.model.y -= this.velocity;
       this.prev_y = now_y;
+      if (this.model.y < 0 && this.model.min_y < this.model.y) {
+        e.preventDefault();
+      }
       return this.move();
     };
 

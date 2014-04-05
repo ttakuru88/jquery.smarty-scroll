@@ -18,7 +18,6 @@ class MobilePage
     @el.on 'touchend',   @touchend
 
   touchstart: (e) =>
-    e.preventDefault()
     return if @touch
 
     @prev_y = @get_y(e)
@@ -33,6 +32,8 @@ class MobilePage
     @velocity = @prev_y - now_y
     @model.y -= @velocity
     @prev_y = now_y
+
+    e.preventDefault() if @model.y < 0 && @model.min_y < @model.y
 
     @move()
 
