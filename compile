@@ -1,4 +1,0 @@
-#!/bin/sh
-
-coffee --compile src
-mv ./src/jquery.smartquescroll.js ./sample/

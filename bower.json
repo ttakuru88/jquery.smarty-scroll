@@ -1,0 +1,25 @@
+{
+  "name": "jquery.smarty-scroll",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ttakuru88/jquery.smarty-scroll",
+  "authors": [
+    "ttakuru88"
+  ],
+  "main": "dist/jquery.smarty-scroll.js",
+  "keywords": [
+    "jquery",
+    "ios",
+    "scroll"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}

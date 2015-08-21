@@ -1,0 +1,28 @@
+{
+  "name": "jquery.smarty-scroll",
+  "version": "0.1.0",
+  "description": "jquery.smartyScroll ==============",
+  "main": "dist/jquery.smarty-scroll.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ttakuru88/jquery.smarty-scroll.git"
+  },
+  "author": "ttakuru88",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ttakuru88/jquery.smarty-scroll/issues"
+  },
+  "homepage": "https://github.com/ttakuru88/jquery.smarty-scroll",
+  "devDependencies": {
+    "bower": "^1.4.1",
+    "coffee-script": "^1.9.3",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-coffee": "^0.13.0",
+    "grunt-contrib-copy": "^0.8.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
