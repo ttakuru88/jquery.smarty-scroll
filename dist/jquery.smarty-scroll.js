@@ -122,7 +122,7 @@
   })();
 
   (function($) {
-    return $.fn.smartquescroll = function(options) {
+    return $.fn.smartyScroll = function(options) {
       options = $.extend({
         scroll: null,
         throttle: 4,

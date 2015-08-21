@@ -77,7 +77,7 @@ class Page
       @options.scroll?(@wrapper.scrollTop())
 
 (($) ->
-  $.fn.smartquescroll = (options) ->
+  $.fn.smartyScroll = (options) ->
     options = $.extend
       scroll: null
       throttle: 4

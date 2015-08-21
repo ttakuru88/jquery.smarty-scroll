@@ -1,2 +1,2 @@
-jquery.smartyScroll
+jquery.smarty-scroll
 ==============
